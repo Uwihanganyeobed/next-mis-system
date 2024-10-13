@@ -1,0 +1,22 @@
+model Employee {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  role       Role     @relation(fields: [roleId], references: [id])
+  roleId     Int
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId Int
+  createdAt  DateTime @default(now())
+}
+
+model Department {
+  id    Int      @id @default(autoincrement())
+  name  String
+  employees Employee[]
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  employees Employee[]
+}
